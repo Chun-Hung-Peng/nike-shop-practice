@@ -1,0 +1,46 @@
+.product-fade-enter {
+    opacity: 0;
+}
+
+.product-fade-enter-active {
+    opacity: 1;
+    transition: all 0.3s ease-in;
+}
+
+.product-fade-exit {
+    opacity: 1;
+}
+
+.product-fade-exit-active {
+    opacity: 0;
+    transition: all 0.3s ease-in;
+}
+
+.addButton {
+    position: fixed;
+    top: 80px;
+    right: 5px;
+    z-index: 9;
+}
+
+.outOfEditButton {
+    position: relative;
+}
+
+.editButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.outOfShopButton {
+    position: relative;
+}
+
+.shopButton {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 0;
+}
