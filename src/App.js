@@ -20,7 +20,7 @@ export default function App() {
     <BrowserRouter>
       <Header user={user} />
       <Switch>
-        <Route path='/home' exact component={Home} />
+        <Route path='/home' component={Home} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/products' component={Products} />
