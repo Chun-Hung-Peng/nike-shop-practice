@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/nike-shop-practice/static/css/main.5eb8c648.chunk.css",
+    "main.js": "/nike-shop-practice/static/js/main.2df866d3.chunk.js",
+    "main.js.map": "/nike-shop-practice/static/js/main.2df866d3.chunk.js.map",
+    "runtime-main.js": "/nike-shop-practice/static/js/runtime-main.44b70cba.js",
+    "runtime-main.js.map": "/nike-shop-practice/static/js/runtime-main.44b70cba.js.map",
+    "static/css/2.935323d2.chunk.css": "/nike-shop-practice/static/css/2.935323d2.chunk.css",
+    "static/js/2.1525467c.chunk.js": "/nike-shop-practice/static/js/2.1525467c.chunk.js",
+    "static/js/2.1525467c.chunk.js.map": "/nike-shop-practice/static/js/2.1525467c.chunk.js.map",
+    "index.html": "/nike-shop-practice/index.html",
+    "static/css/2.935323d2.chunk.css.map": "/nike-shop-practice/static/css/2.935323d2.chunk.css.map",
+    "static/css/main.5eb8c648.chunk.css.map": "/nike-shop-practice/static/css/main.5eb8c648.chunk.css.map",
+    "static/js/2.1525467c.chunk.js.LICENSE.txt": "/nike-shop-practice/static/js/2.1525467c.chunk.js.LICENSE.txt",
+    "static/media/backgroundlogo.4585cf33.jpg": "/nike-shop-practice/static/media/backgroundlogo.4585cf33.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.44b70cba.js",
+    "static/css/2.935323d2.chunk.css",
+    "static/js/2.1525467c.chunk.js",
+    "static/css/main.5eb8c648.chunk.css",
+    "static/js/main.2df866d3.chunk.js"
+  ]
+}
