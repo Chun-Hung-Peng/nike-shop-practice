@@ -32,7 +32,7 @@ const CartItem = props => {
             <Row className="align-items-center">
                 <Col xs={6}>
                     <button className='noneButton' onClick={deleteCart}>x</button>
-                    <Image src={image} alt={name} className='prodcut-info' style={{ width: '100px', margin: '0 30px' }} />
+                    <Image src={process.env.PUBLIC_URL + image} alt={name} className='prodcut-info' style={{ width: '100px', margin: '0 30px' }} />
                     <p className='prodcut-info'>{name}</p>
                 </Col>
                 <Col><span className="price">{price}</span></Col>

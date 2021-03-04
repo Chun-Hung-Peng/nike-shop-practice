@@ -82,7 +82,7 @@ class Product extends Component {
         return (
             <Card>
                 {this.renderManBtn()}
-                <Card.Img variant="top" src={image} style={{ maxWidth: '400px', maxHeight: '400px' }} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + image} style={{ maxWidth: '400px', maxHeight: '400px' }} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>{tags}</Card.Text>
