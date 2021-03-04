@@ -12,7 +12,7 @@ class Panel extends Component {
         this.setState({
             show: false,
         })
-        this.state.callback(data)
+        this.state.callback(data);
     }
     handleShow = (options = {
         props: {},
@@ -39,6 +39,7 @@ class Panel extends Component {
                 onHide={this.handleClose}
                 backdrop="static"
                 keyboard={false}
+                centered
             >
                 {this.state.component}
             </Modal>

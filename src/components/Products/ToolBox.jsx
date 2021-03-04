@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { Row, Col, FormControl, Nav, Button } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
+import { Row, Col, FormControl, Button } from 'react-bootstrap';
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { toast } from 'react-toastify';
 
-export default class ToolBox extends Component {
+class ToolBox extends Component {
     state = {
-        searchText: ''
+        searchText: '',
+        carNumber: 0
     }
     handleChange = e => {
         const value = e.target.value
@@ -17,6 +20,15 @@ export default class ToolBox extends Component {
         this.setState({ searchText: '' });
         this.props.searchProduct('')
     }
+
+    goCart = () => {
+        if (!global.auth.isLogin()) {
+            this.props.history.push('/login');
+            toast.info('請先登入帳號');
+            return;
+        }
+        this.props.history.push('/cart');
+    };
     render() {
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -30,12 +42,14 @@ export default class ToolBox extends Component {
                     </Col>
                     <Button variant="outline-secondary" onClick={this.clearInput}>Clear</Button>
                     <Col className='text-center'>
-                        <Nav.Link style={{ color: 'black' }}>
+                        <Button className='noneButton' variant="outline-none" onClick={this.goCart} style={{ color: 'black', marginTop: '5px' }}>
                             <AiOutlineShoppingCart style={{ width: '25px', height: '25px' }} />
-                        </Nav.Link>
+                            <p style={{ display: 'inline-block', marginLeft: '10px' }}>({this.props.carNumber})</p>
+                        </Button>
                     </Col>
                 </Row>
             </div>
         )
     }
 }
+export default withRouter(ToolBox);

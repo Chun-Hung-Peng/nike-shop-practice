@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import axios from '../../common/axios';
 import { Button, Card } from 'react-bootstrap';
 import { BsListUl } from "react-icons/bs";
@@ -8,7 +9,7 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { toast } from 'react-toastify';
 
 
-export default class Product extends Component {
+class Product extends Component {
     toEdit = () => {
         Panel.handleShow({
             props: {
@@ -24,27 +25,53 @@ export default class Product extends Component {
         })
     }
     addCar = async () => {
+        if (!global.auth.isLogin()) {
+            this.props.history.push('/login');
+            toast.info('請先登入帳號');
+            return;
+        }
         try {
-            const { id, name, image, price } = this.props.product
-            const res = await axios.get(`/carts?productId=${id}`)
-            const carts = res.data
+            const user = global.auth.getUser() || {};
+            const { id, name, image, price } = this.props.product;
+            const res = await axios.get('/carts', {
+                params: {
+                    productId: id,
+                    userId: user.email
+                }
+            });
+            const carts = res.data;
             if (carts && carts.length > 0) {
-                const cart = carts[0]
-                cart.mount = + 1
-                axios.put(`/carts??productId=${id}`)
+                const cart = carts[0];
+                cart.mount += 1
+                await axios.put(`/carts/${cart.id}`, cart);
             } else {
                 const cart = {
                     productId: id,
-                    name, image, price,
-                    mount: 1
-                }
-                await axios.post('./carts', cart)
+                    name,
+                    image,
+                    price,
+                    mount: 1,
+                    userId: user.email
+                };
+                await axios.post('/carts', cart);
             }
             toast.success('新增成功')
+            this.props.updateCarNum()
         } catch (error) {
             toast.success('新增失敗')
         }
-
+    }
+    renderManBtn = () => {
+        const user = global.auth.getUser() || {}
+        if (user.type === 1) {
+            return (
+                <div className='outOfEditButton'>
+                    <Button className='editButton' variant="outline-none" onClick={this.toEdit}>
+                        <BsListUl style={{ width: '25px', height: '25px' }} />
+                    </Button>
+                </div>
+            )
+        }
     }
     render() {
         const { name, image, tags, price, status } = this.props.product
@@ -54,11 +81,7 @@ export default class Product extends Component {
         }
         return (
             <Card>
-                <div className='outOfEditButton'>
-                    <Button className='editButton' variant="outline-none" onClick={this.toEdit}>
-                        <BsListUl style={{ width: '25px', height: '25px' }} />
-                    </Button>
-                </div>
+                {this.renderManBtn()}
                 <Card.Img variant="top" src={image} style={{ maxWidth: '400px', maxHeight: '400px' }} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
@@ -82,3 +105,4 @@ export default class Product extends Component {
         )
     }
 }
+export default withRouter(Product)

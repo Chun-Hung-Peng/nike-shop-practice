@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import './style.css'
 import {
   BrowserRouter,
@@ -8,18 +8,24 @@ import {
 import Header from './common/Header'
 import Home from './components/Home'
 import Login from './components/Login'
+import Register from './components/Register'
 import Products from './components/Products'
-import NotFound from './common/NotFound'
+import Cart from './components/Cart'
 
-export default function Router() {
+export default function App() {
+  const user = useMemo(() => {
+    return global.auth.getUser() || {}
+  }, [])
   return (
     <BrowserRouter>
-      <Header />
+      <Header user={user} />
       <Switch>
         <Route path='/home' exact component={Home} />
         <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
         <Route path='/products' component={Products} />
-        <Route component={NotFound} />
+        <Route path='/cart' component={Cart} />
+        <Route component={Home} />
       </Switch>
     </BrowserRouter>
   )

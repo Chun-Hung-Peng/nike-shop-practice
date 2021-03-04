@@ -1,10 +1,24 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { BsFillPersonFill } from "react-icons/bs";
-import { Link } from 'react-router-dom';
-
+import { Link, withRouter } from 'react-router-dom';
+import Panel from './Panel';
+import UserProfile from '../components/UserProfile';
 
 const Header = props => {
+    const toProfile = () => {
+        Panel.handleShow({
+            props: {
+                user: props.user
+            },
+            component: UserProfile,
+            callback: data => {
+                if (data === 'logout') {
+                    props.history.go(0)
+                }
+            }
+        })
+    }
     return (
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand className="ml-4" >Nike</Navbar.Brand>
@@ -13,15 +27,15 @@ const Header = props => {
                 <Nav.Link as={Link} to="/products" >產品</Nav.Link>
             </Nav>
             {
-                props.nickname ? (
+                props.user.nickname ? (
                     <Nav className="ml-auto">
                         <BsFillPersonFill style={{ height: '32px', width: '32px', marginTop: '5px' }} />
-                        <Button className="mr-4" variant="dark">{props.nickname}
+                        <Button onClick={toProfile} className="mr-4" variant="dark">{props.user.nickname}
                         </Button>
                     </Nav>) :
                     (
                         <Nav className="ml-auto">
-                            <Button as={Link} to="/login" variant="dark">註冊</Button>
+                            <Button as={Link} to="/register" className="mr-4" variant="dark">註冊</Button>
                             <Button as={Link} to="/login" className="mr-4" variant="dark">登入</Button>
                         </Nav>)
             }
@@ -29,5 +43,5 @@ const Header = props => {
     );
 }
 
-export default Header;
+export default withRouter(Header);
 

@@ -10,7 +10,8 @@ import { Row, Col, Button } from 'react-bootstrap';
 class Products extends Component {
     state = {
         product: [],
-        sourceProduct: []
+        sourceProduct: [],
+        carNumber: 0
     }
     componentDidMount() {
         axios.get('/products').then(response => {
@@ -19,6 +20,7 @@ class Products extends Component {
                 sourceProduct: response.data,
             })
         })
+        this.updateCarNum()
     }
     searchProduct = text => {
         let _product = [...this.state.sourceProduct]
@@ -69,13 +71,36 @@ class Products extends Component {
             sourceProduct: _sproducts
         })
     }
+    updateCarNum = async () => {
+        const carNum = await this.getCarNum()
+        this.setState({
+            carNumber: carNum
+        })
+    }
+    getCarNum = async () => {
+        const user = global.auth.getUser() || {};
+        const res = await axios.get('/carts', {
+            params: {
+                userId: user.email
+            }
+        })
+        const carts = res.data || []
+        const cartNum = carts
+            .map(cart => Number(cart.mount))
+            .reduce((a, value) => a + value, 0)
+        return cartNum
+    }
     render() {
         return (
             <div>
-                <div className='addButton'>
-                    <Button variant="dark" onClick={this.toAdd}>添加產品</Button>
-                </div>
-                <ToolBox searchProduct={this.searchProduct} />
+                {
+                    (global.auth.getUser() || {}).type === 1 && (
+                        <div className='addButton'>
+                            <Button variant="dark" onClick={this.toAdd}>添加產品</Button>
+                        </div>
+                    )
+                }
+                <ToolBox searchProduct={this.searchProduct} carNumber={this.state.carNumber} />
                 <Row className='mx-4'>
                     <TransitionGroup component={null}>
                         {
@@ -87,6 +112,7 @@ class Products extends Component {
                                                 product={p}
                                                 editProducts={this.editProducts}
                                                 deleteProducts={this.deleteProducts}
+                                                updateCarNum={this.updateCarNum}
                                             />
                                         </Col>
                                     </CSSTransition>
