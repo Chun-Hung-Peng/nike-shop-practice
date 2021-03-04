@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/nike-shop-practice/static/css/main.5eb8c648.chunk.css",
-    "main.js": "/nike-shop-practice/static/js/main.11282fa3.chunk.js",
-    "main.js.map": "/nike-shop-practice/static/js/main.11282fa3.chunk.js.map",
+    "main.js": "/nike-shop-practice/static/js/main.01beaec7.chunk.js",
+    "main.js.map": "/nike-shop-practice/static/js/main.01beaec7.chunk.js.map",
     "runtime-main.js": "/nike-shop-practice/static/js/runtime-main.49cb515f.js",
     "runtime-main.js.map": "/nike-shop-practice/static/js/runtime-main.49cb515f.js.map",
     "static/css/2.8f2b7d81.chunk.css": "/nike-shop-practice/static/css/2.8f2b7d81.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.8f2b7d81.chunk.css",
     "static/js/2.faa94e45.chunk.js",
     "static/css/main.5eb8c648.chunk.css",
-    "static/js/main.11282fa3.chunk.js"
+    "static/js/main.01beaec7.chunk.js"
   ]
 }
